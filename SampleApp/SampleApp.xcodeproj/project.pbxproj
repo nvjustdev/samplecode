@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C59E43421B751DB0051D740 /* ManagerSpecialStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C59E43321B751DB0051D740 /* ManagerSpecialStructs.swift */; };
 		4C8F75E321B72C9700994420 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F75E221B72C9700994420 /* AppDelegate.swift */; };
 		4C8F75E521B72C9700994420 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F75E421B72C9700994420 /* ViewController.swift */; };
 		4C8F75E821B72C9700994420 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C8F75E621B72C9700994420 /* Main.storyboard */; };
@@ -15,7 +16,8 @@
 		4C8F75F021B72C9B00994420 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C8F75EE21B72C9B00994420 /* LaunchScreen.storyboard */; };
 		4C8F75FB21B72C9B00994420 /* SampleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F75FA21B72C9B00994420 /* SampleAppTests.swift */; };
 		4C8F760621B72C9B00994420 /* SampleAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F760521B72C9B00994420 /* SampleAppUITests.swift */; };
-		4C8F761421B72D3800994420 /* ManagerSpecials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F761321B72D3800994420 /* ManagerSpecials.swift */; };
+		4C8F761421B72D3800994420 /* ManagerSpecialsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F761321B72D3800994420 /* ManagerSpecialsModel.swift */; };
+		4CCF5E7321B835E200A4AD97 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF5E7221B835E200A4AD97 /* ErrorHandling.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C59E43321B751DB0051D740 /* ManagerSpecialStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerSpecialStructs.swift; sourceTree = "<group>"; };
 		4C8F75DF21B72C9600994420 /* SampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C8F75E221B72C9700994420 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C8F75E421B72C9700994420 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -50,7 +53,8 @@
 		4C8F760121B72C9B00994420 /* SampleAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C8F760521B72C9B00994420 /* SampleAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleAppUITests.swift; sourceTree = "<group>"; };
 		4C8F760721B72C9B00994420 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4C8F761321B72D3800994420 /* ManagerSpecials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerSpecials.swift; sourceTree = "<group>"; };
+		4C8F761321B72D3800994420 /* ManagerSpecialsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerSpecialsModel.swift; sourceTree = "<group>"; };
+		4CCF5E7221B835E200A4AD97 /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +107,9 @@
 			children = (
 				4C8F75E221B72C9700994420 /* AppDelegate.swift */,
 				4C8F75E421B72C9700994420 /* ViewController.swift */,
-				4C8F761321B72D3800994420 /* ManagerSpecials.swift */,
+				4C59E43321B751DB0051D740 /* ManagerSpecialStructs.swift */,
+				4C8F761321B72D3800994420 /* ManagerSpecialsModel.swift */,
+				4CCF5E7221B835E200A4AD97 /* ErrorHandling.swift */,
 				4C8F75E621B72C9700994420 /* Main.storyboard */,
 				4C8F75EC21B72C9B00994420 /* Assets.xcassets */,
 				4C8F75EE21B72C9B00994420 /* LaunchScreen.storyboard */,
@@ -263,9 +269,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C8F75EB21B72C9700994420 /* SampleApp.xcdatamodeld in Sources */,
+				4C59E43421B751DB0051D740 /* ManagerSpecialStructs.swift in Sources */,
 				4C8F75E521B72C9700994420 /* ViewController.swift in Sources */,
+				4CCF5E7321B835E200A4AD97 /* ErrorHandling.swift in Sources */,
 				4C8F75E321B72C9700994420 /* AppDelegate.swift in Sources */,
-				4C8F761421B72D3800994420 /* ManagerSpecials.swift in Sources */,
+				4C8F761421B72D3800994420 /* ManagerSpecialsModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,12 +449,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				"DEBUG_INFORMATION_FORMAT[sdk=*]" = dwarf;
 				DEVELOPMENT_TEAM = 3WT55PT69P;
+				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = SampleApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-Xfrontend -warn-long-expression-type-checking=100 -Xfrontend -warn-long-function-bodies=100 -Onone";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nirmala.SampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
