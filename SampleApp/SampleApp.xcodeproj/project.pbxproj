@@ -19,6 +19,7 @@
 		4C8F761421B72D3800994420 /* ManagerSpecialsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F761321B72D3800994420 /* ManagerSpecialsModel.swift */; };
 		4CCF5E7321B835E200A4AD97 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF5E7221B835E200A4AD97 /* ErrorHandling.swift */; };
 		4CCF5E7521B83F2200A4AD97 /* UsefulExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF5E7421B83F2200A4AD97 /* UsefulExtensions.swift */; };
+		4CCF5E7721B8550300A4AD97 /* ManagerSpecialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF5E7621B8550300A4AD97 /* ManagerSpecialView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		4C8F761321B72D3800994420 /* ManagerSpecialsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerSpecialsModel.swift; sourceTree = "<group>"; };
 		4CCF5E7221B835E200A4AD97 /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
 		4CCF5E7421B83F2200A4AD97 /* UsefulExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsefulExtensions.swift; sourceTree = "<group>"; };
+		4CCF5E7621B8550300A4AD97 /* ManagerSpecialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerSpecialView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			children = (
 				4C8F75E221B72C9700994420 /* AppDelegate.swift */,
 				4C8F75E421B72C9700994420 /* ViewController.swift */,
+				4CCF5E7621B8550300A4AD97 /* ManagerSpecialView.swift */,
 				4CCF5E7421B83F2200A4AD97 /* UsefulExtensions.swift */,
 				4C59E43321B751DB0051D740 /* ManagerSpecialStructs.swift */,
 				4C8F761321B72D3800994420 /* ManagerSpecialsModel.swift */,
@@ -273,6 +276,7 @@
 			files = (
 				4C8F75EB21B72C9700994420 /* SampleApp.xcdatamodeld in Sources */,
 				4C59E43421B751DB0051D740 /* ManagerSpecialStructs.swift in Sources */,
+				4CCF5E7721B8550300A4AD97 /* ManagerSpecialView.swift in Sources */,
 				4C8F75E521B72C9700994420 /* ViewController.swift in Sources */,
 				4CCF5E7321B835E200A4AD97 /* ErrorHandling.swift in Sources */,
 				4C8F75E321B72C9700994420 /* AppDelegate.swift in Sources */,

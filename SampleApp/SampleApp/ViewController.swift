@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var foundationView: UIStackView!
+    
     // A handle for the ManagerSpecialsModel class
     var managerSpecials : ManagerSpecialsModel = ManagerSpecialsModel.init()
 
@@ -42,7 +44,7 @@ class ViewController: UIViewController {
                 DispatchQueue.main.async {
                     
                     // Get the current view frame width
-                    let viewWidth: CGFloat  = self.view.frame.width
+                    let viewWidth: CGFloat  = self.foundationView.frame.width
                     
                     // Determine the divisible unit width
                     // Reference: The canvasUnit will determine how many divisible units fits into the full width of the phone.
@@ -52,7 +54,7 @@ class ViewController: UIViewController {
                     
                     // For each ManagerSpecial in the list, process the width and the height
                     for managerSpecial in managerSpecialList {
-                        let imageView: UIImageView = UIImageView.init(frame: CGRect.init(x: 10.0, y: 10.0, width: 100, height: 100))
+                        
                         print(managerSpecial.display_name)
                         print(managerSpecial.imageUrl)
                         
@@ -62,13 +64,20 @@ class ViewController: UIViewController {
                             return
                         }
                         
-                        imageView.load(url: url)
-                        self.view.addSubview(imageView)
                         print(managerSpecial.width * divisibleUnitWidth)
                         print(managerSpecial.height * divisibleUnitWidth)
                         print(managerSpecial.original_price)
                         print(managerSpecial.price)
                         print("\n")
+                        
+                        let customView: ManagerSpecialView = ManagerSpecialView.init(frame: CGRect(x: 10.0, y: 10.0, width: Double(managerSpecial.width * divisibleUnitWidth), height: Double(managerSpecial.height * divisibleUnitWidth)))
+                        
+                        customView.iconImageView.load(url: url)
+                        customView.originalPrice.text = managerSpecial.original_price
+                        customView.price.text = managerSpecial.price
+                        customView.specialTitle.text = managerSpecial.display_name
+                        
+                        self.view.addSubview(customView)
                     }
                 }
                 
