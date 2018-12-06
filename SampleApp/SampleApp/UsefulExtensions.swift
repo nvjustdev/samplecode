@@ -24,6 +24,12 @@ extension Int {
     var cgFloat: CGFloat { return CGFloat(self) }
 }
 
+extension Double {
+    
+    // Get the CGFloat value for the double
+    var cgFloat: CGFloat { return CGFloat(self) }
+}
+
 extension UIImageView {
     
     // Get the image from a given URL

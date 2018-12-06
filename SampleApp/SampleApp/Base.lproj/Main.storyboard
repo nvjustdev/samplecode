@@ -31,7 +31,7 @@
                                 <rect key="frame" x="16" y="90" width="343" height="557"/>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.8080012998560745" green="0.81797662454565567" blue="0.81797662454565567" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.91858889164765156" green="0.9276838311689154" blue="0.9276838311689154" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="w6c-Dt-6U1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="CLe-SE-Hv8"/>
                             <constraint firstItem="UZI-5t-ESd" firstAttribute="top" secondItem="w6c-Dt-6U1" secondAttribute="bottom" constant="8" id="Keh-QK-hnk"/>

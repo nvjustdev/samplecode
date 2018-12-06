@@ -13,6 +13,9 @@ class ViewController: UIViewController {
     // A handle for the ManagerSpecialsModel class
     var managerSpecials : ManagerSpecialsModel = ManagerSpecialsModel.init()
     
+    // A flag to skip placement
+    var shouldSkipPlacement: Bool = false
+    
     // The handle for the vertical UIStackView
     @IBOutlet weak var verticalStackView: UIStackView!
     
@@ -67,73 +70,86 @@ class ViewController: UIViewController {
                     let numberManagerSpecials = managerSpecialList.count
                     
                     // For each ManagerSpecial in the list, process the width and the height
-                    for index in 0...numberManagerSpecials {
+                    for index in 0...(numberManagerSpecials - 1) {
                         
-                        // Get the current specials
-                        let managerSpecial: ManagerSpecial = managerSpecialList[index]
-                        
-                        // Get the next specials
-                        let nextManagerSpecial: ManagerSpecial = managerSpecialList[index + 1]
-                        
-                        // Get the result for the fit
-                        let result: Bool = self.doesFitInSameLine(currentManagerSpecial: managerSpecial, nextManagerSpecial: nextManagerSpecial, canvasUnit: canvasUnit)
-                        
-                        print(managerSpecial.display_name)
-                        print(managerSpecial.imageUrl)
-                        
-                        // Convert the url string to URL entity
-                        // Putting a guard to avoid nil value for the variable
-                        guard let url = URL(string: managerSpecial.imageUrl) else {
-                            return
-                        }
-                        
-                        // If the check for same row resulted in false
-                        if !result {
+                        // Check if the placement should be skipped
+                        if !self.shouldSkipPlacement {
                             
-                            // Create a custom view for the special
-                            let customView: IndividualManagerSpecialView = IndividualManagerSpecialView(frame: CGRect(x: (result ? 1 : 0) * adjustmentFactorX + 0, y:  (result ? 0 : 1) * adjustmentFactorY + 0, width: managerSpecial.width * divisibleUnitWidth, height: managerSpecial.height * divisibleUnitWidth))
+                            // Get the current specials
+                            let managerSpecial: ManagerSpecial = managerSpecialList[index]
                             
-                            // Set the attributes of this view
-                            customView.specialImage.load(url: url)
-                            customView.originalPrice.text = managerSpecial.original_price
-                            customView.specialPrice.text = managerSpecial.price
-                            customView.specialHeadline.text = managerSpecial.display_name
+                            // Get the next specials
+                            var nextManagerSpecial: ManagerSpecial?
                             
-                            // Set the constraints
-                            customView.heightAnchor.constraint(equalToConstant: (managerSpecial.height * divisibleUnitWidth).cgFloat)
-                            customView.widthAnchor.constraint(equalToConstant: (managerSpecial.width * divisibleUnitWidth).cgFloat)
+                            // Check if this is the last one
+                            if index == numberManagerSpecials - 1 {
+                                
+                                // The next is nil
+                                nextManagerSpecial = nil
+                            } else {
+                                
+                                // Get the next since there are more
+                                nextManagerSpecial = managerSpecialList[index + 1]
+                            }
                             
-                            // Increment the Y factor
-                            adjustmentFactorY = adjustmentFactorY + managerSpecial.height * divisibleUnitWidth + self.verticalStackView.spacing.integer
+                            // Get the result for the fit
+                            let result: Bool = self.doesFitInSameLine(currentManagerSpecial: managerSpecial, nextManagerSpecial: nextManagerSpecial, canvasUnit: canvasUnit)
                             
-                            // add the view to the stack
-                            self.verticalStackView.addSubview(customView)
-                        } else {
+//                            print(managerSpecial.display_name)
+//                            print(managerSpecial.imageUrl)
                             
-                            // Check for same row resulted in true
-                            // Create a horizontal UIStackView as wide as the vertical stack view
-                            let horizontalStackView: UIStackView = UIStackView.init(frame: CGRect(x: 0, y: adjustmentFactorY + 0, width: viewWidth.integer, height: max(managerSpecial.height, nextManagerSpecial.height) * divisibleUnitWidth))
-                            
-                            // Set the attributes of this stack view
-                            horizontalStackView.axis = .horizontal
-                            horizontalStackView.alignment = .center
-                            horizontalStackView.spacing = 20.0
-                            horizontalStackView.distribution = .fillProportionally
-                            
-                            // Reset the X factor
-                            adjustmentFactorX = 0
-                            
-                            // Add the first custom view to the
-                            
-                            // Increment the X factor
-                            adjustmentFactorX = adjustmentFactorX + managerSpecial.width * divisibleUnitWidth + self.verticalStackView.spacing.integer
-                            
-                            
+                            // If the check for same row resulted in false
+                            if !result {
+                                
+                                // Should not skip the placement of the next special
+                                self.shouldSkipPlacement = false
+                                
+                                let customView = self.getIndividualManagerSpecialView(result: result, adjustmentFactorX: adjustmentFactorX, adjustmentFactorY: adjustmentFactorY, divisibleUnitWidth: divisibleUnitWidth, managerSpecial: managerSpecial)
+                                
+                                // Increment the Y factor
+                                adjustmentFactorY = adjustmentFactorY + managerSpecial.height * divisibleUnitWidth + self.verticalStackView.spacing.integer
+                                
+                                // add the view to the stack
+                                self.verticalStackView.addSubview(customView)
+                            } else {
+                                
+                                // Check for same row resulted in true
+                                // Create a horizontal UIStackView as wide as the vertical stack view
+                                // There's no need to check for nextManagerSpecial being nil as the result can be true only if nextManagerSpecial is present
+                                
+                                // Should skip the placement of the next special
+                                self.shouldSkipPlacement = true
+                                
+                                let horizontalStackView: UIStackView = UIStackView.init(frame: CGRect(x: 0, y: adjustmentFactorY + 0, width: viewWidth.integer, height: max(managerSpecial.height, nextManagerSpecial!.height) * divisibleUnitWidth))
+                                
+                                // Set the attributes of this stack view
+                                horizontalStackView.axis = .horizontal
+                                horizontalStackView.alignment = .center
+                                horizontalStackView.spacing = 6.0
+                                horizontalStackView.distribution = .fillProportionally
+                                
+                                // Reset the X factor
+                                adjustmentFactorX = 0
+                                
+                                // Get and add the first custom view to the horizontal stack view
+                                let firstCustomView = self.getIndividualManagerSpecialView(result: result, adjustmentFactorX: adjustmentFactorX, adjustmentFactorY: adjustmentFactorY, divisibleUnitWidth: divisibleUnitWidth, managerSpecial: managerSpecial)
+                                horizontalStackView.addSubview(firstCustomView)
+                                
+                                // Increment the X factor
+                                adjustmentFactorX = adjustmentFactorX + managerSpecial.width * divisibleUnitWidth + horizontalStackView.spacing.integer
+                                
+                                // Get and add the next custom view to the horizontal stack view
+                                let nextCustomView = self.getIndividualManagerSpecialView(result: result, adjustmentFactorX: adjustmentFactorX, adjustmentFactorY: adjustmentFactorY, divisibleUnitWidth: divisibleUnitWidth, managerSpecial: nextManagerSpecial!)
+                                
+                                horizontalStackView.addSubview(nextCustomView)
+                                
+                                // Add the horizontal stack view to the vertical stack view
+                                self.verticalStackView.addSubview(horizontalStackView)
+                                
+                            }
                         }
                     }
-                    
                 }
-                
             }
         }
     }
@@ -142,17 +158,50 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    fileprivate func doesFitInSameLine(currentManagerSpecial: ManagerSpecial, nextManagerSpecial: ManagerSpecial, canvasUnit: Int) -> Bool {
+    // To check if the current and the next special will fit in a line
+    // MARK: Assumption that no more than two specials will look aesthetically good together
+    // TODO: Need to generalize this by 12/25/2018
+    fileprivate func doesFitInSameLine(currentManagerSpecial: ManagerSpecial, nextManagerSpecial: ManagerSpecial?, canvasUnit: Int) -> Bool {
         
         // Start with false - assume that the specials won't fit in the same row
         var result: Bool = false
         
+        if nextManagerSpecial == nil {
+            return result
+        }
+        
         // Check if the sum of the widths is less than or equal to the canvasUnit
-        if currentManagerSpecial.width + nextManagerSpecial.width <= canvasUnit {
+        if currentManagerSpecial.width + nextManagerSpecial!.width <= canvasUnit {
             result = true
         }
         
         return result
+    }
+    
+    // To get the custom view to add to the stack
+    fileprivate func getIndividualManagerSpecialView(result: Bool, adjustmentFactorX: Int, adjustmentFactorY: Int, divisibleUnitWidth: Int, managerSpecial: ManagerSpecial) -> IndividualManagerSpecialView {
+        
+        // Create a custom view for the special
+        let individualManagerSpecialView: IndividualManagerSpecialView = IndividualManagerSpecialView(frame: CGRect(x: (result ? 1 : 0) * adjustmentFactorX + 0, y:  (result ? 0 : 1) * adjustmentFactorY + 0, width: managerSpecial.width * divisibleUnitWidth - (result ? 1 : 0) * 3, height: managerSpecial.height * divisibleUnitWidth))
+        
+        // Convert the url string to URL entity
+        let url = URL(string: managerSpecial.imageUrl)
+        
+        // Set the attributes of this view
+        // Checking to avoid nil value for the variable
+        if url != nil {
+            individualManagerSpecialView.specialImage.load(url: url!)
+        }
+        
+        individualManagerSpecialView.originalPrice.text = managerSpecial.original_price
+        individualManagerSpecialView.specialPrice.text = managerSpecial.price
+        individualManagerSpecialView.specialHeadline.text = managerSpecial.display_name
+        
+        // Set the constraints
+        individualManagerSpecialView.heightAnchor.constraint(equalToConstant: (managerSpecial.height * divisibleUnitWidth).cgFloat)
+        individualManagerSpecialView.widthAnchor.constraint(equalToConstant: (managerSpecial.width * divisibleUnitWidth).cgFloat)
+        
+        return individualManagerSpecialView
     }
 }
 

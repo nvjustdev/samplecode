@@ -13,16 +13,21 @@ class IndividualManagerSpecialView: UIView {
     let kCONTENT_XIB_NAME = "IndividualManagerSpecialView"
     
     var origin : CGPoint = CGPoint.init()
+    var width : Double = 10.0
     
     lazy var specialImage: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 20, y: 20, width: 80, height: 80))
-        print(origin)
+        let image = UIImageView(frame: CGRect(x: 10, y: center.y - 70, width: 70, height: 70))
         return image
     }()
     
     lazy var specialHeadline: UILabel = {
-        let label = UILabel(frame: CGRect(x: 20, y: 100, width: 200, height: 30))
+        print(center.x)
+        print((width * 0.85)/2)
+        let label = UILabel(frame: CGRect(x: 25, y: center.y, width: (width * 0.85).cgFloat, height: 80))//UILabel(frame: CGRect(x: center.x - ((width * 0.90)/2).cgFloat, y: center.y + 20, width: (width * 0.90).cgFloat, height: 75))
         label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = UIFont.init(name: "San Francisco", size: 10.0)
+        print(label.center)
         return label
     }()
     
@@ -54,8 +59,15 @@ class IndividualManagerSpecialView: UIView {
         // Change the corners to be rounded
         self.layer.cornerRadius = 8.0
         
+        // Set the border
+        self.layer.borderColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:1.0).cgColor
+        self.layer.borderWidth = 1
+        
         // Set the origin
         self.origin = self.frame.origin
+        
+        // Set the width of the frame
+        self.width = self.frame.width.double
         
         // Add all the subviews
         self.addSubview(specialHeadline)
