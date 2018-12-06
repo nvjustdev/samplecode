@@ -18,7 +18,15 @@ extension CGFloat {
     var integer: Int { return Int(self) }
 }
 
+extension Int {
+    
+    // Get the CGFloat value for integer
+    var cgFloat: CGFloat { return CGFloat(self) }
+}
+
 extension UIImageView {
+    
+    // Get the image from a given URL
     func load(url: URL) {
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: url) {

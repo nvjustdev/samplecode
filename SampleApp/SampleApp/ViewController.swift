@@ -10,13 +10,18 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var foundationView: UIStackView!
-    
     // A handle for the ManagerSpecialsModel class
     var managerSpecials : ManagerSpecialsModel = ManagerSpecialsModel.init()
 
+    // The handle for the vertical UIStackView
+    @IBOutlet weak var verticalStackView: UIStackView!
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        verticalStackView.alignment = .center
+        verticalStackView.spacing = 30.0
+        verticalStackView.distribution = .fillProportionally
         
         // Calling this in viewWillAppear so that the date is ready before the view is loaded
         // TODO: Process Indicator needs to be shown till the response is returned
@@ -44,13 +49,17 @@ class ViewController: UIViewController {
                 DispatchQueue.main.async {
                     
                     // Get the current view frame width
-                    let viewWidth: CGFloat  = self.foundationView.frame.width
+                    let viewWidth: CGFloat  = self.verticalStackView.frame.width
                     
                     // Determine the divisible unit width
                     // Reference: The canvasUnit will determine how many divisible units fits into the full width of the phone.
                     // ** For example: if the canvasUnit is 8 and the total width of the phone is 360px then each unit is 360px/8 = 45px.
                     
                     let divisibleUnitWidth: Int = viewWidth.integer / canvasUnit
+                    
+                    // There's a need for an adjustment factor and a marker for where the next block should be rendered.
+                    // Using one variable adjustmentFactor for both that
+                    var adjustmentFactor: Int = 0
                     
                     // For each ManagerSpecial in the list, process the width and the height
                     for managerSpecial in managerSpecialList {
@@ -64,21 +73,23 @@ class ViewController: UIViewController {
                             return
                         }
                         
-                        print(managerSpecial.width * divisibleUnitWidth)
-                        print(managerSpecial.height * divisibleUnitWidth)
-                        print(managerSpecial.original_price)
-                        print(managerSpecial.price)
-                        print("\n")
+                        let customView: IndividualManagerSpecialView = IndividualManagerSpecialView(frame: CGRect(x: 0, y: adjustmentFactor + 0, width: managerSpecial.width * divisibleUnitWidth, height: managerSpecial.height * divisibleUnitWidth))
                         
-                        let customView: ManagerSpecialView = ManagerSpecialView.init(frame: CGRect(x: 10.0, y: 10.0, width: Double(managerSpecial.width * divisibleUnitWidth), height: Double(managerSpecial.height * divisibleUnitWidth)))
-                        
-                        customView.iconImageView.load(url: url)
+                        customView.specialImage.load(url: url)
                         customView.originalPrice.text = managerSpecial.original_price
-                        customView.price.text = managerSpecial.price
-                        customView.specialTitle.text = managerSpecial.display_name
+                        customView.specialPrice.text = managerSpecial.price
+                        customView.specialHeadline.text = managerSpecial.display_name
                         
-                        self.view.addSubview(customView)
+                        customView.heightAnchor.constraint(equalToConstant: (managerSpecial.height * divisibleUnitWidth).cgFloat)
+                        customView.widthAnchor.constraint(equalToConstant: (managerSpecial.width * divisibleUnitWidth).cgFloat)
+                        
+                        adjustmentFactor = adjustmentFactor + managerSpecial.height * divisibleUnitWidth + 20
+                        
+                        print(adjustmentFactor)
+                        
+                        self.verticalStackView.addSubview(customView)
                     }
+                    
                 }
                 
             }
