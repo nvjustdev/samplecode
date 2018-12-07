@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        //TODO: Animate the loading screen - 12/25/2018
+        //TODO: Animate the loading screen - 12/10/2018
         return true
     }
 

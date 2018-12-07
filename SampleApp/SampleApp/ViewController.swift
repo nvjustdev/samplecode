@@ -28,19 +28,19 @@ class ViewController: UIViewController {
         verticalStackView.distribution = .fillProportionally
         
         // Calling this in viewWillAppear so that the date is ready before the view is loaded
-        // TODO: Process Indicator needs to be shown till the response is returned - 12/25/2018
+        // TODO: Process Indicator needs to be shown till the response is returned - 12/10/2018
         managerSpecials.getManagerSpecials { (specials, error) in
             
             if error != nil {
                 
-                // TODO: Show an alert with the error - 12/25/2018
+                // TODO: Show an alert with the error - 12/10/2018
                 print(error.debugDescription)
             } else {
                 
                 // Process the responses
                 guard specials != nil else {
                     
-                    // TODO: Show an alert with the message - 12/25/2018
+                    // TODO: Show an alert with the message - 12/10/2018
                     return
                 }
                 
@@ -63,8 +63,8 @@ class ViewController: UIViewController {
                     
                     // There's a need for an adjustment factor and a marker for where the next block should be rendered.
                     // Using one variable adjustmentFactor for both the factor and marker, one more axis
-                    //TODO: Use Layout Constraints instead of adjustment factor - 12/25/2018
-                    //TODO: Once Layout Constraints are used, remove the restrictions of portrait only - 12/25/2018
+                    //TODO: Use Layout Constraints instead of adjustment factor - 12/10/2018
+                    //TODO: Once Layout Constraints are used, remove the restrictions of portrait only - 12/10/2018
                     var adjustmentFactorY: Int = 0
                     var adjustmentFactorX: Int = 0
                     
@@ -158,7 +158,7 @@ class ViewController: UIViewController {
     
     // To check if the current and the next special will fit in a line
     // MARK: Assumption that no more than two specials will look aesthetically good together
-    // TODO: Need to generalize this by 12/25/2018
+    // TODO: Need to generalize this by 12/15/2018
     fileprivate func doesFitInSameLine(currentManagerSpecial: ManagerSpecial, nextManagerSpecial: ManagerSpecial?, canvasUnit: Int) -> Bool {
         
         // Start with false - assume that the specials won't fit in the same row
