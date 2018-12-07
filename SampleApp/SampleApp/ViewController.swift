@@ -28,19 +28,19 @@ class ViewController: UIViewController {
         verticalStackView.distribution = .fillProportionally
         
         // Calling this in viewWillAppear so that the date is ready before the view is loaded
-        // TODO: Process Indicator needs to be shown till the response is returned
+        // TODO: Process Indicator needs to be shown till the response is returned - 12/25/2018
         managerSpecials.getManagerSpecials { (specials, error) in
             
             if error != nil {
                 
-                // Show an alert with the error
+                // TODO: Show an alert with the error - 12/25/2018
                 print(error.debugDescription)
             } else {
                 
                 // Process the responses
                 guard specials != nil else {
                     
-                    // Show an alert with the message
+                    // TODO: Show an alert with the message - 12/25/2018
                     return
                 }
                 
@@ -64,11 +64,12 @@ class ViewController: UIViewController {
                     // There's a need for an adjustment factor and a marker for where the next block should be rendered.
                     // Using one variable adjustmentFactor for both the factor and marker, one more axis
                     //TODO: Use Layout Constraints instead of adjustment factor - 12/25/2018
+                    //TODO: Once Layout Constraints are used, remove the restrictions of portrait only - 12/25/2018
                     var adjustmentFactorY: Int = 0
                     var adjustmentFactorX: Int = 0
                     
                     // Get the number of manager specials
-                    let numberManagerSpecials = managerSpecialList.count
+                    let numberManagerSpecials: Int = managerSpecialList.count
                     
                     // For each ManagerSpecial in the list, process the width and the height
                     for index in 0...(numberManagerSpecials - 1) {
@@ -102,7 +103,7 @@ class ViewController: UIViewController {
                                 // Should not skip the placement of the next special
                                 self.shouldSkipPlacement = false
                                 
-                                let customView = self.getIndividualManagerSpecialView(result: result, adjustmentFactorX: adjustmentFactorX, adjustmentFactorY: adjustmentFactorY, divisibleUnitWidth: divisibleUnitWidth, managerSpecial: managerSpecial)
+                                let customView: IndividualManagerSpecialView = self.getIndividualManagerSpecialView(result: result, adjustmentFactorX: adjustmentFactorX, adjustmentFactorY: adjustmentFactorY, divisibleUnitWidth: divisibleUnitWidth, managerSpecial: managerSpecial)
                                 
                                 // Increment the Y factor
                                 adjustmentFactorY = adjustmentFactorY + managerSpecial.height * divisibleUnitWidth + self.verticalStackView.spacing.integer
@@ -123,7 +124,7 @@ class ViewController: UIViewController {
                                 // Set the attributes of this stack view
                                 horizontalStackView.axis = .horizontal
                                 horizontalStackView.alignment = .center
-                                horizontalStackView.spacing = 6.0
+                                horizontalStackView.spacing = 4.0
                                 horizontalStackView.distribution = .fillProportionally
                                 
                                 // Reset the X factor
@@ -179,7 +180,7 @@ class ViewController: UIViewController {
     fileprivate func getIndividualManagerSpecialView(result: Bool, adjustmentFactorX: Int, adjustmentFactorY: Int, divisibleUnitWidth: Int, managerSpecial: ManagerSpecial) -> IndividualManagerSpecialView {
         
         // Create a custom view for the special
-        let individualManagerSpecialView: IndividualManagerSpecialView = IndividualManagerSpecialView(frame: CGRect(x: (result ? 1 : 0) * adjustmentFactorX + 0, y:  (result ? 0 : 1) * adjustmentFactorY + 0, width: managerSpecial.width * divisibleUnitWidth - (result ? 1 : 0) * 3, height: managerSpecial.height * divisibleUnitWidth))
+        let individualManagerSpecialView: IndividualManagerSpecialView = IndividualManagerSpecialView(frame: CGRect(x: (result ? 1 : 0) * adjustmentFactorX + 0, y:  (result ? 0 : 1) * adjustmentFactorY + 0, width: managerSpecial.width * divisibleUnitWidth - (result ? 1 : 0) * 2, height: managerSpecial.height * divisibleUnitWidth))
         
         // Convert the url string to URL entity
         let url = URL(string: managerSpecial.imageUrl)
@@ -195,8 +196,6 @@ class ViewController: UIViewController {
         
         let attributesForOriginalPrice = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 20), NSAttributedString.Key.strikethroughStyle : NSUnderlineStyle.single.rawValue] as [NSAttributedString.Key : Any]
         let attributedOriginalPrice = NSMutableAttributedString(string: "$" + managerSpecial.original_price, attributes:attributesForOriginalPrice)
-        
-        print(managerSpecial.display_name.count)
 
         individualManagerSpecialView.specialPrice.attributedText = attributedSpecialPrice
         individualManagerSpecialView.originalPrice.attributedText = attributedOriginalPrice

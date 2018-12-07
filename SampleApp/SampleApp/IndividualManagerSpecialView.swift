@@ -24,9 +24,9 @@ class IndividualManagerSpecialView: UIView {
     
     lazy var specialHeadline: UILabel = {
         let label = UILabel.init()
-        label.numberOfLines = 0
+        label.numberOfLines = 2
         label.textAlignment = .center
-        label.font = UIFont.init(name: "San Francisco", size: 15.0)
+        label.font = UIFont.init(name: "San Francisco", size: 10.0)
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
@@ -34,16 +34,16 @@ class IndividualManagerSpecialView: UIView {
     lazy var originalPrice: UILabel = {
         let label = UILabel.init()
         label.textColor = UIColor(red:0.60, green:0.60, blue:0.60, alpha:1.0)
-        label.font = UIFont.init(name: "San Francisco", size: 20.0)
-        label.textAlignment = .center
+        label.font = UIFont.init(name: "San Francisco", size: 30.0)
+        label.textAlignment = .right
         return label
     }()
     
     lazy var specialPrice: UILabel = {
         let label = UILabel.init()
         label.textColor = UIColor(red:0.09, green:0.61, blue:0.47, alpha:1.0)
-        label.font = UIFont.init(name: "San Francisco", size: 20.0)
-        label.textAlignment = .center
+        label.font = UIFont.init(name: "San Francisco", size: 30.0)
+        label.textAlignment = .right
         return label
     }()
 
@@ -61,9 +61,9 @@ class IndividualManagerSpecialView: UIView {
         
         // Set the shadow
         self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = CGSize(width: 0, height: 1.0)
-        self.layer.shadowOpacity = 0.2
-        self.layer.shadowRadius = 4.0
+        self.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        self.layer.shadowOpacity = 0.4
+        self.layer.shadowRadius = 5.0
         
         // Set the background color to be white
         self.backgroundColor = .white
@@ -94,27 +94,26 @@ class IndividualManagerSpecialView: UIView {
             specialHeadline.topAnchor.constraint(equalTo: self.centerYAnchor, constant: 22.0),
             specialHeadline.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             specialHeadline.widthAnchor.constraint(lessThanOrEqualToConstant: CGFloat(self.width * 0.70)),
-            specialHeadline.heightAnchor.constraint(lessThanOrEqualToConstant: 100.0)])
-        
+            specialHeadline.heightAnchor.constraint(greaterThanOrEqualToConstant: 0.0)])
         
         // specialImage: contraints
         specialImage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             specialImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 30.0),
-            specialImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20.0),
-            specialImage.widthAnchor.constraint(equalToConstant: 70.0),
-            specialImage.heightAnchor.constraint(equalToConstant: 70.0)
+            specialImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15.0),
+            specialImage.widthAnchor.constraint(equalToConstant: 65.0),
+            specialImage.heightAnchor.constraint(equalToConstant: 65.0)
             ])
         
         // originalPrice: contraints
         originalPrice.translatesAutoresizingMaskIntoConstraints = false
         
-        let originalPriceConstraint = NSLayoutConstraint.init(item: originalPrice, attribute: .trailingMargin, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1.0, constant: -5.0)
+        let originalPriceConstraint = NSLayoutConstraint.init(item: originalPrice, attribute: .trailingMargin, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1.0, constant: -15.0)
         originalPriceConstraint.isActive = true
         
         NSLayoutConstraint.activate([
-            originalPrice.widthAnchor.constraint(equalToConstant: (width * 0.35).cgFloat),
+            originalPrice.widthAnchor.constraint(equalToConstant: (width * 0.40).cgFloat),
             originalPrice.heightAnchor.constraint(equalToConstant: 30.0),
             originalPrice.topAnchor.constraint(equalTo: specialImage.topAnchor, constant: 5.0)
             ])
@@ -122,11 +121,11 @@ class IndividualManagerSpecialView: UIView {
         // specialPrice: contraints
         specialPrice.translatesAutoresizingMaskIntoConstraints = false
         
-        let specialPriceConstraint = NSLayoutConstraint.init(item: specialPrice, attribute: .trailingMargin, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1.0, constant: -5.0)
+        let specialPriceConstraint = NSLayoutConstraint.init(item: specialPrice, attribute: .trailingMargin, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1.0, constant: -15.0)
         specialPriceConstraint.isActive = true
         
         NSLayoutConstraint.activate([
-            specialPrice.widthAnchor.constraint(equalToConstant: (width * 0.35).cgFloat),
+            specialPrice.widthAnchor.constraint(equalToConstant: (width * 0.40).cgFloat),
             specialPrice.heightAnchor.constraint(equalToConstant: 30.0),
             specialPrice.topAnchor.constraint(equalTo: originalPrice.bottomAnchor)
             ])

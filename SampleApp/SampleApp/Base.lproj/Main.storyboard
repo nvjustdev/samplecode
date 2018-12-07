@@ -18,28 +18,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lhg-or-qol">
+                                <rect key="frame" x="16" y="90" width="343" height="557"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="UZI-5t-ESd">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="557"/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="UZI-5t-ESd" firstAttribute="leading" secondItem="lhg-or-qol" secondAttribute="leading" id="2IK-oO-j3b"/>
+                                    <constraint firstItem="UZI-5t-ESd" firstAttribute="centerX" secondItem="lhg-or-qol" secondAttribute="centerX" id="afN-dO-j2y"/>
+                                    <constraint firstAttribute="bottom" secondItem="UZI-5t-ESd" secondAttribute="bottom" id="bn0-VG-yta"/>
+                                    <constraint firstItem="UZI-5t-ESd" firstAttribute="top" secondItem="lhg-or-qol" secondAttribute="top" id="rBq-FZ-Dai"/>
+                                    <constraint firstItem="UZI-5t-ESd" firstAttribute="centerY" secondItem="lhg-or-qol" secondAttribute="centerY" id="tPK-QW-gVL"/>
+                                    <constraint firstAttribute="trailing" secondItem="UZI-5t-ESd" secondAttribute="trailing" id="wct-Vs-2YG"/>
+                                </constraints>
+                            </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manager's Special" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w6c-Dt-6U1">
                                 <rect key="frame" x="16" y="32" width="343" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="9VU-Ju-4No"/>
+                                    <constraint firstAttribute="height" constant="50" id="K5f-WM-yuN"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="UZI-5t-ESd">
-                                <rect key="frame" x="16" y="90" width="343" height="557"/>
-                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.91858889164765156" green="0.9276838311689154" blue="0.9276838311689154" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="w6c-Dt-6U1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="CLe-SE-Hv8"/>
-                            <constraint firstItem="UZI-5t-ESd" firstAttribute="top" secondItem="w6c-Dt-6U1" secondAttribute="bottom" constant="8" id="Keh-QK-hnk"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="UZI-5t-ESd" secondAttribute="bottom" constant="20" id="VeV-l4-vww"/>
-                            <constraint firstItem="w6c-Dt-6U1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="12" id="dhW-OX-Ge5"/>
-                            <constraint firstItem="w6c-Dt-6U1" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="mjs-1r-bvB"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UZI-5t-ESd" secondAttribute="trailing" constant="16" id="qFF-yI-u4b"/>
-                            <constraint firstItem="UZI-5t-ESd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="zHV-dF-aNv"/>
+                            <constraint firstAttribute="bottom" secondItem="lhg-or-qol" secondAttribute="bottom" constant="20" symbolic="YES" id="3NY-Gg-EIU"/>
+                            <constraint firstItem="w6c-Dt-6U1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="12" id="6Zs-Qn-yKg"/>
+                            <constraint firstItem="lhg-or-qol" firstAttribute="trailing" secondItem="w6c-Dt-6U1" secondAttribute="trailing" id="7vD-YL-g7k"/>
+                            <constraint firstItem="w6c-Dt-6U1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="G4G-i3-mEl"/>
+                            <constraint firstItem="lhg-or-qol" firstAttribute="top" secondItem="w6c-Dt-6U1" secondAttribute="bottom" constant="8" symbolic="YES" id="HyR-5I-F1b"/>
+                            <constraint firstItem="w6c-Dt-6U1" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="rNz-6s-gRT"/>
+                            <constraint firstItem="w6c-Dt-6U1" firstAttribute="leading" secondItem="lhg-or-qol" secondAttribute="leading" id="yEA-AJ-DNk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
