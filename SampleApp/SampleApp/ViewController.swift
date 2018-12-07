@@ -63,6 +63,7 @@ class ViewController: UIViewController {
                     
                     // There's a need for an adjustment factor and a marker for where the next block should be rendered.
                     // Using one variable adjustmentFactor for both the factor and marker, one more axis
+                    //TODO: Use Layout Constraints instead of adjustment factor - 12/25/2018
                     var adjustmentFactorY: Int = 0
                     var adjustmentFactorX: Int = 0
                     
@@ -94,9 +95,6 @@ class ViewController: UIViewController {
                             
                             // Get the result for the fit
                             let result: Bool = self.doesFitInSameLine(currentManagerSpecial: managerSpecial, nextManagerSpecial: nextManagerSpecial, canvasUnit: canvasUnit)
-                            
-//                            print(managerSpecial.display_name)
-//                            print(managerSpecial.imageUrl)
                             
                             // If the check for same row resulted in false
                             if !result {
@@ -145,7 +143,6 @@ class ViewController: UIViewController {
                                 
                                 // Add the horizontal stack view to the vertical stack view
                                 self.verticalStackView.addSubview(horizontalStackView)
-                                
                             }
                         }
                     }
@@ -193,8 +190,16 @@ class ViewController: UIViewController {
             individualManagerSpecialView.specialImage.load(url: url!)
         }
         
-        individualManagerSpecialView.originalPrice.text = managerSpecial.original_price
-        individualManagerSpecialView.specialPrice.text = managerSpecial.price
+        let attributesForSpecialPrice = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 20)]
+        let attributedSpecialPrice = NSMutableAttributedString(string:"$" + managerSpecial.price, attributes:attributesForSpecialPrice)
+        
+        let attributesForOriginalPrice = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 20), NSAttributedString.Key.strikethroughStyle : NSUnderlineStyle.single.rawValue] as [NSAttributedString.Key : Any]
+        let attributedOriginalPrice = NSMutableAttributedString(string: "$" + managerSpecial.original_price, attributes:attributesForOriginalPrice)
+        
+        print(managerSpecial.display_name.count)
+
+        individualManagerSpecialView.specialPrice.attributedText = attributedSpecialPrice
+        individualManagerSpecialView.originalPrice.attributedText = attributedOriginalPrice
         individualManagerSpecialView.specialHeadline.text = managerSpecial.display_name
         
         // Set the constraints

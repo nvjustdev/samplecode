@@ -16,28 +16,34 @@ class IndividualManagerSpecialView: UIView {
     var width : Double = 10.0
     
     lazy var specialImage: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 10, y: center.y - 70, width: 70, height: 70))
+        let image = UIImageView.init()
         return image
     }()
     
+    /*For the font please use Apple's default font: San Francisco. The crossed out price color is: #989898. The price color is: #179C77 and the name text color is: #000000. There is also a 1px border around the cell of #D8D8D8. Hope that helps.*/
+    
     lazy var specialHeadline: UILabel = {
-        print(center.x)
-        print((width * 0.85)/2)
-        let label = UILabel(frame: CGRect(x: 25, y: center.y, width: (width * 0.85).cgFloat, height: 80))//UILabel(frame: CGRect(x: center.x - ((width * 0.90)/2).cgFloat, y: center.y + 20, width: (width * 0.90).cgFloat, height: 75))
+        let label = UILabel.init()
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.font = UIFont.init(name: "San Francisco", size: 10.0)
-        print(label.center)
+        label.font = UIFont.init(name: "San Francisco", size: 15.0)
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     lazy var originalPrice: UILabel = {
-        let label = UILabel(frame: CGRect(x: 100, y: 20, width: 30, height: 10))
+        let label = UILabel.init()
+        label.textColor = UIColor(red:0.60, green:0.60, blue:0.60, alpha:1.0)
+        label.font = UIFont.init(name: "San Francisco", size: 20.0)
+        label.textAlignment = .center
         return label
     }()
     
     lazy var specialPrice: UILabel = {
-        let label = UILabel(frame: CGRect(x: 100, y: 20, width: 30, height: 10))
+        let label = UILabel.init()
+        label.textColor = UIColor(red:0.09, green:0.61, blue:0.47, alpha:1.0)
+        label.font = UIFont.init(name: "San Francisco", size: 20.0)
+        label.textAlignment = .center
         return label
     }()
 
@@ -52,6 +58,12 @@ class IndividualManagerSpecialView: UIView {
     }
     
     func commonSetup() {
+        
+        // Set the shadow
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+        self.layer.shadowOpacity = 0.2
+        self.layer.shadowRadius = 4.0
         
         // Set the background color to be white
         self.backgroundColor = .white
@@ -74,5 +86,49 @@ class IndividualManagerSpecialView: UIView {
         self.addSubview(specialImage)
         self.addSubview(originalPrice)
         self.addSubview(specialPrice)
+        
+        // specialHeadline: constraints
+        specialHeadline.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            specialHeadline.topAnchor.constraint(equalTo: self.centerYAnchor, constant: 22.0),
+            specialHeadline.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            specialHeadline.widthAnchor.constraint(lessThanOrEqualToConstant: CGFloat(self.width * 0.70)),
+            specialHeadline.heightAnchor.constraint(lessThanOrEqualToConstant: 100.0)])
+        
+        
+        // specialImage: contraints
+        specialImage.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            specialImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 30.0),
+            specialImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20.0),
+            specialImage.widthAnchor.constraint(equalToConstant: 70.0),
+            specialImage.heightAnchor.constraint(equalToConstant: 70.0)
+            ])
+        
+        // originalPrice: contraints
+        originalPrice.translatesAutoresizingMaskIntoConstraints = false
+        
+        let originalPriceConstraint = NSLayoutConstraint.init(item: originalPrice, attribute: .trailingMargin, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1.0, constant: -5.0)
+        originalPriceConstraint.isActive = true
+        
+        NSLayoutConstraint.activate([
+            originalPrice.widthAnchor.constraint(equalToConstant: (width * 0.35).cgFloat),
+            originalPrice.heightAnchor.constraint(equalToConstant: 30.0),
+            originalPrice.topAnchor.constraint(equalTo: specialImage.topAnchor, constant: 5.0)
+            ])
+        
+        // specialPrice: contraints
+        specialPrice.translatesAutoresizingMaskIntoConstraints = false
+        
+        let specialPriceConstraint = NSLayoutConstraint.init(item: specialPrice, attribute: .trailingMargin, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1.0, constant: -5.0)
+        specialPriceConstraint.isActive = true
+        
+        NSLayoutConstraint.activate([
+            specialPrice.widthAnchor.constraint(equalToConstant: (width * 0.35).cgFloat),
+            specialPrice.heightAnchor.constraint(equalToConstant: 30.0),
+            specialPrice.topAnchor.constraint(equalTo: originalPrice.bottomAnchor)
+            ])
     }
 }
